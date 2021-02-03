@@ -1,18 +1,74 @@
 import React from "react";
-import { TwitterTweetEmbed, TwitterTimelineEmbed } from "react-twitter-embed";
+import { Button, Form } from "react-bootstrap";
+import { TwitterTweetEmbed } from "react-twitter-embed";
+import { useParams } from "react-router-dom";
 
 function Home() {
+  const params = useParams();
+  let [page, setPage] = React.useState(params.page || 1);
+  let [pageField, setPageField] = React.useState(page);
+  const itemsPerPage = 10;
+
+  const totalPages = parseInt(allData.length / itemsPerPage) + 1;
+  let filteredItems = allData.slice((page - 1) * 10, page * 10);
+
+  // console.log(filteredItems);
+
   return (
     <div className="content-strip">
       <div className="container">
-        <div>
-          {allData.map((item) => {
+        <div className="list">
+          {filteredItems.map((item) => {
             return (
               <div className="item">
                 <TwitterTweetEmbed tweetId={item} />
               </div>
             );
           })}
+        </div>
+        <div className="pagination">
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setPage(pageField);
+            }}
+          >
+            <Form.Control
+              value={pageField}
+              onChange={(e) => setPageField(e.target.value)}
+              size="sm"
+              type="number"
+            />
+          </Form>
+          /<span>{totalPages}</span>{" "}
+          <Button
+            onClick={() => {
+              if (page > 1) {
+                let newPage = -1 + Number(page);
+                setPage(newPage);
+                setPageField(newPage);
+
+              }
+            }}
+            variant="light"
+            size="sm"
+          >
+            {"Previous"}
+          </Button>{" "}
+          <Button
+            onClick={() => {
+              if (page < totalPages) {
+                let newPage = 1 + Number(page);
+                setPage(newPage);
+                setPageField(newPage);
+
+              }
+            }}
+            variant="light"
+            size="sm"
+          >
+            {"Next"}
+          </Button>
         </div>
       </div>
     </div>
@@ -58,4 +114,28 @@ const data = [
   "1346268431428026369",
 ];
 
-const allData = [...data, other];
+let allData = [...data, other, ...wiseconnector];
+
+// allData = [
+//   1,
+//   2,
+//   3,
+//   4,
+//   5,
+//   6,
+//   7,
+//   8,
+//   9,
+//   10,
+//   11,
+//   12,
+//   13,
+//   14,
+//   15,
+//   16,
+//   17,
+//   18,
+//   19,
+//   20,
+//   21,
+// ];
