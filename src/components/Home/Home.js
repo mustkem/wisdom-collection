@@ -1,10 +1,12 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { TwitterTweetEmbed } from "react-twitter-embed";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+
 
 function Home() {
   const params = useParams();
+  const history = useHistory();
   let [page, setPage] = React.useState(params.page || 1);
   let [pageField, setPageField] = React.useState(page);
   const itemsPerPage = 10;
@@ -14,10 +16,27 @@ function Home() {
 
   // console.log(filteredItems);
 
+  const handlePageChange = (value) => {
+    let newPage = value + Number(page);
+    setPage(newPage);
+    setPageField(newPage);
+
+    history.push("/home/"+newPage)
+  };
+
+  React.useEffect(()=>{
+    console.log(params);
+    setPage(params.page || 1);
+    setPageField(params.page || 1);
+
+    window.scrollTo(0,0);
+
+  }, [params.page]);
+
   return (
     <div className="content-strip">
       <div className="container">
-        <div className="list">
+        <div key={page} className="list">
           {filteredItems.map((item) => {
             return (
               <div className="item">
@@ -31,6 +50,7 @@ function Home() {
             onSubmit={(e) => {
               e.preventDefault();
               setPage(pageField);
+              window.scrollTo(0,0);
             }}
           >
             <Form.Control
@@ -44,10 +64,7 @@ function Home() {
           <Button
             onClick={() => {
               if (page > 1) {
-                let newPage = -1 + Number(page);
-                setPage(newPage);
-                setPageField(newPage);
-
+                handlePageChange(-1);
               }
             }}
             variant="light"
@@ -58,10 +75,7 @@ function Home() {
           <Button
             onClick={() => {
               if (page < totalPages) {
-                let newPage = 1 + Number(page);
-                setPage(newPage);
-                setPageField(newPage);
-
+                handlePageChange(1);
               }
             }}
             variant="light"
