@@ -49,7 +49,7 @@ function App() {
         </div>
         <div className="logo-bottom-strip">
           <div className="container">
-            <div className="logo-bottom">@M</div>
+            <div className="logo-bottom">@2021</div>
           </div>
         </div>
       </div>
