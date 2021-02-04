@@ -6,11 +6,13 @@ function Home() {
   return (
       <div className="content-strip">
         <div className="container">
+          <div key="timelines">
           <TwitterTimelineEmbed
             sourceType="profile"
             screenName="thelogansia"
             options={{ height: 700 }}
           />
+          </div>
       </div>
     </div>
   );

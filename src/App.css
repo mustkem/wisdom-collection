@@ -27,6 +27,7 @@ html, body, .root, .App{
   font-size: 30px;
   font-weight: bold;
   padding-bottom: 5px;
+  padding-top: 15px;
 }
 
 .app-header .content{
@@ -57,7 +58,7 @@ html, body, .root, .App{
 .pagination{
   display: flex;
   align-items: center;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 justify-content: flex-end;
 }
 
