@@ -26,7 +26,7 @@ html, body, .root, .App{
   padding:5px;
   font-size: 30px;
   font-weight: bold;
-  padding-bottom: 0px;
+  padding-bottom: 5px;
 }
 
 .app-header .content{
