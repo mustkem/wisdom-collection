@@ -3,7 +3,6 @@ import { Button, Form } from "react-bootstrap";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 import { useParams, useHistory } from "react-router-dom";
 
-
 function Home() {
   const params = useParams();
   const history = useHistory();
@@ -21,16 +20,15 @@ function Home() {
     setPage(newPage);
     setPageField(newPage);
 
-    history.push("/home/"+newPage)
+    history.push("/home/" + newPage);
   };
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     console.log(params);
     setPage(params.page || 1);
     setPageField(params.page || 1);
 
-    window.scrollTo(0,0);
-
+    window.scrollTo(0, 0);
   }, [params.page]);
 
   return (
@@ -39,10 +37,8 @@ function Home() {
         <div key={page} className="list">
           {filteredItems.map((item) => {
             return (
-              <div className="item" onLoad={(e)=>{
-                console.log(e.target)
-              }}>
-                <TwitterTweetEmbed tweetId={item} />
+              <div key={item} className="item">
+                <TwitterTweetEmbed key={item} tweetId={item} />
               </div>
             );
           })}
@@ -52,7 +48,7 @@ function Home() {
             onSubmit={(e) => {
               e.preventDefault();
               setPage(pageField);
-              window.scrollTo(0,0);
+              window.scrollTo(0, 0);
             }}
           >
             <Form.Control
