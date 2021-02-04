@@ -39,7 +39,9 @@ function Home() {
         <div key={page} className="list">
           {filteredItems.map((item) => {
             return (
-              <div className="item">
+              <div className="item" onLoad={(e)=>{
+                console.log(e.target)
+              }}>
                 <TwitterTweetEmbed tweetId={item} />
               </div>
             );

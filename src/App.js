@@ -23,7 +23,7 @@ function App() {
         <header className="app-header">
           <div className="container">
             <div className="content">
-              <div className="title">Wisdom</div>
+              <div className="title">Twitter Wisdom</div>
               <div className="navbar">
                 <NavLink to="/home">Home</NavLink>
                 <NavLink to="/timelines">Timelines</NavLink>
@@ -42,6 +42,7 @@ function App() {
           <Route path="/home">
             <Home />
           </Route>
+          <Route exact path="/" render={() => (<Redirect to="/home" />)} />  
           {/* <Route path="/">
             <Redirect to="/home" />
           </Route> */}
